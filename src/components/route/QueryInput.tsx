@@ -30,11 +30,12 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
   return (
     <div className="space-y-3">
       <div>
-        <label className="text-xs font-medium text-zinc-400 uppercase tracking-widest mb-1.5 block">
+        <label htmlFor="query" className="text-xs font-medium text-zinc-400 uppercase tracking-widest mb-1.5 block">
           Natural Language Query
         </label>
         <form onSubmit={handleSubmit} className="relative">
           <textarea
+            id="query"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Describe your journey in natural language…"
@@ -55,6 +56,7 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
           />
           <button
             type="submit"
+            aria-label="Submit query"
             disabled={!isValid || isLoading}
             className={cn(
               "absolute bottom-3 right-3 p-1.5 rounded-lg transition-all duration-200",
