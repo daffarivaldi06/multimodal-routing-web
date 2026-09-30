@@ -1,0 +1,3 @@
+## 2024-09-30 - Add ARIA Labels and associate labels to inputs
+**Learning:** Found a common accessibility issue where form labels are missing the `htmlFor` association to the input's `id`, and icon-only buttons missing `aria-label` attributes.
+**Action:** Always ensure that `<label>` tags explicitly link to the input via `id`, and icon-only buttons clearly explain their state/action via `aria-label`.
