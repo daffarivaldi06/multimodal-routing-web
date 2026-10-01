@@ -30,11 +30,12 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
   return (
     <div className="space-y-3">
       <div>
-        <label className="text-xs font-medium text-zinc-400 uppercase tracking-widest mb-1.5 block">
+        <label htmlFor="query-input" className="text-xs font-medium text-zinc-400 uppercase tracking-widest mb-1.5 block">
           Natural Language Query
         </label>
         <form onSubmit={handleSubmit} className="relative">
           <textarea
+            id="query-input"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Describe your journey in natural language…"
@@ -55,9 +56,10 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
           />
           <button
             type="submit"
+            aria-label="Submit route query"
             disabled={!isValid || isLoading}
             className={cn(
-              "absolute bottom-3 right-3 p-1.5 rounded-lg transition-all duration-200",
+              "absolute bottom-3 right-3 p-1.5 rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-1 focus-visible:ring-offset-zinc-900",
               isValid && !isLoading
                 ? "bg-blue-600 hover:bg-blue-500 text-white"
                 : "bg-zinc-800 text-zinc-600 cursor-not-allowed"
@@ -85,7 +87,7 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
             key={q}
             onClick={() => setQuery(q)}
             disabled={isLoading}
-            className="w-full text-left text-xs text-zinc-500 hover:text-zinc-300 bg-zinc-900/50 hover:bg-zinc-800/80 border border-zinc-800 hover:border-zinc-700 rounded-lg px-3 py-2 transition-all duration-200 leading-relaxed disabled:opacity-40"
+            className="w-full text-left text-xs text-zinc-500 hover:text-zinc-300 bg-zinc-900/50 hover:bg-zinc-800/80 border border-zinc-800 hover:border-zinc-700 rounded-lg px-3 py-2 transition-all duration-200 leading-relaxed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
           >
             {q}
           </button>
