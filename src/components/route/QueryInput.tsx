@@ -30,13 +30,22 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
   return (
     <div className="space-y-3">
       <div>
-        <label className="text-xs font-medium text-zinc-400 uppercase tracking-widest mb-1.5 block">
+        <label htmlFor="route-query" className="text-xs font-medium text-zinc-400 uppercase tracking-widest mb-1.5 block">
           Natural Language Query
         </label>
         <form onSubmit={handleSubmit} className="relative">
           <textarea
+            id="route-query"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                if (isValid && !isLoading) {
+                  handleSubmit(e as unknown as React.FormEvent);
+                }
+              }
+            }}
             placeholder="Describe your journey in natural language…"
             rows={4}
             maxLength={500}
@@ -56,6 +65,7 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
           <button
             type="submit"
             disabled={!isValid || isLoading}
+            aria-label="Submit query"
             className={cn(
               "absolute bottom-3 right-3 p-1.5 rounded-lg transition-all duration-200",
               isValid && !isLoading
