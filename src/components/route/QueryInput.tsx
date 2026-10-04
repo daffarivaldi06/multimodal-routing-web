@@ -30,13 +30,22 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
   return (
     <div className="space-y-3">
       <div>
-        <label className="text-xs font-medium text-zinc-400 uppercase tracking-widest mb-1.5 block">
+        <label htmlFor="query-input" className="text-xs font-medium text-zinc-400 uppercase tracking-widest mb-1.5 block">
           Natural Language Query
         </label>
         <form onSubmit={handleSubmit} className="relative">
           <textarea
+            id="query-input"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                if (query.trim().length >= 10 && !isLoading) {
+                  onSubmit(query.trim());
+                }
+              }
+            }}
             placeholder="Describe your journey in natural language…"
             rows={4}
             maxLength={500}
@@ -56,6 +65,7 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
           <button
             type="submit"
             disabled={!isValid || isLoading}
+            aria-label="Submit query"
             className={cn(
               "absolute bottom-3 right-3 p-1.5 rounded-lg transition-all duration-200",
               isValid && !isLoading
@@ -71,7 +81,7 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
           </button>
         </form>
         <div className="flex justify-between items-center mt-1.5">
-          <span className="text-xs text-zinc-600">Min 10 characters</span>
+          <span className="text-xs text-zinc-600">Min 10 characters • Press Enter to submit</span>
           <span className={cn("text-xs", charCount > 480 ? "text-amber-500" : "text-zinc-600")}>
             {charCount}/500
           </span>
