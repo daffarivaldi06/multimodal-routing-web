@@ -27,16 +27,25 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
   const charCount = query.length;
   const isValid = charCount >= 10 && charCount <= 500;
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e as unknown as React.FormEvent);
+    }
+  };
+
   return (
     <div className="space-y-3">
       <div>
-        <label className="text-xs font-medium text-zinc-400 uppercase tracking-widest mb-1.5 block">
+        <label htmlFor="query-input" className="text-xs font-medium text-zinc-400 uppercase tracking-widest mb-1.5 block cursor-pointer">
           Natural Language Query
         </label>
         <form onSubmit={handleSubmit} className="relative">
           <textarea
+            id="query-input"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder="Describe your journey in natural language…"
             rows={4}
             maxLength={500}
@@ -56,6 +65,8 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
           <button
             type="submit"
             disabled={!isValid || isLoading}
+            aria-label="Submit query"
+            title="Submit query (Enter)"
             className={cn(
               "absolute bottom-3 right-3 p-1.5 rounded-lg transition-all duration-200",
               isValid && !isLoading

@@ -1,0 +1,1 @@
+## 2024-05-18 - Natural Language Conversational Input\n**Learning:** Users typing natural language queries expect a conversational UX pattern where 'Enter' submits and 'Shift+Enter' adds a newline, especially in a chat-like interface.\n**Action:** Enforce this pattern for all natural language textareas rather than standard multiline behavior.
