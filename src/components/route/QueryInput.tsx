@@ -30,17 +30,19 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
   return (
     <div className="space-y-3">
       <div>
-        <label className="text-xs font-medium text-zinc-400 uppercase tracking-widest mb-1.5 block">
+        <label htmlFor="query-input" className="text-xs font-medium text-zinc-400 uppercase tracking-widest mb-1.5 block">
           Natural Language Query
         </label>
         <form onSubmit={handleSubmit} className="relative">
           <textarea
+            id="query-input"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Describe your journey in natural language…"
             rows={4}
             maxLength={500}
             disabled={isLoading}
+            aria-describedby="query-helper-text"
             className={cn(
               "w-full rounded-xl bg-zinc-900 border text-sm text-zinc-200",
               "placeholder:text-zinc-600 resize-none",
@@ -56,8 +58,10 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
           <button
             type="submit"
             disabled={!isValid || isLoading}
+            aria-label="Submit route query"
             className={cn(
               "absolute bottom-3 right-3 p-1.5 rounded-lg transition-all duration-200",
+              "focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none",
               isValid && !isLoading
                 ? "bg-blue-600 hover:bg-blue-500 text-white"
                 : "bg-zinc-800 text-zinc-600 cursor-not-allowed"
@@ -70,9 +74,9 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
             )}
           </button>
         </form>
-        <div className="flex justify-between items-center mt-1.5">
+        <div id="query-helper-text" className="flex justify-between items-center mt-1.5">
           <span className="text-xs text-zinc-600">Min 10 characters</span>
-          <span className={cn("text-xs", charCount > 480 ? "text-amber-500" : "text-zinc-600")}>
+          <span aria-live="polite" className={cn("text-xs", charCount > 480 ? "text-amber-500" : "text-zinc-600")}>
             {charCount}/500
           </span>
         </div>
