@@ -17,15 +17,25 @@ interface QueryInputProps {
 export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
   const [query, setQuery] = useState("");
 
+  const charCount = query.length;
+  const isLengthValid = charCount >= 10 && charCount <= 500;
+  const isValid = query.trim().length >= 10 && isLengthValid;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (query.trim().length >= 10 && !isLoading) {
+    if (isValid && !isLoading) {
       onSubmit(query.trim());
     }
   };
 
-  const charCount = query.length;
-  const isValid = charCount >= 10 && charCount <= 500;
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      if (isValid && !isLoading) {
+        onSubmit(query.trim());
+      }
+    }
+  };
 
   return (
     <div className="space-y-3">
@@ -37,6 +47,7 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
           <textarea
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder="Describe your journey in natural language…"
             rows={4}
             maxLength={500}
@@ -48,7 +59,7 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
               "focus:outline-none focus:ring-1 focus:ring-zinc-600 focus:border-zinc-600",
               "transition-colors duration-200",
               "disabled:opacity-50 disabled:cursor-not-allowed",
-              charCount > 0 && !isValid
+              charCount > 0 && !isLengthValid
                 ? "border-red-500/40"
                 : "border-zinc-800 hover:border-zinc-700"
             )}
@@ -56,8 +67,9 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
           <button
             type="submit"
             disabled={!isValid || isLoading}
+            aria-label="Submit query"
             className={cn(
-              "absolute bottom-3 right-3 p-1.5 rounded-lg transition-all duration-200",
+              "absolute bottom-3 right-3 p-1.5 rounded-lg transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900",
               isValid && !isLoading
                 ? "bg-blue-600 hover:bg-blue-500 text-white"
                 : "bg-zinc-800 text-zinc-600 cursor-not-allowed"
