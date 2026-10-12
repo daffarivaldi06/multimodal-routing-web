@@ -38,6 +38,12 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
             id="route-query"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSubmit(e);
+              }
+            }}
             placeholder="Describe your journey in natural language…"
             rows={4}
             maxLength={500}
@@ -73,7 +79,9 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
           </button>
         </form>
         <div className="flex justify-between items-center mt-1.5">
-          <span className="text-xs text-zinc-600">Min 10 characters</span>
+          <span className="text-xs text-zinc-600">
+            Min 10 characters <span className="hidden sm:inline">· Press <kbd className="font-sans px-1 py-0.5 rounded-md bg-zinc-800 border border-zinc-700 text-zinc-400">Enter</kbd> to submit</span>
+          </span>
           <span className={cn("text-xs", charCount > 480 ? "text-amber-500" : "text-zinc-600")}>
             {charCount}/500
           </span>
