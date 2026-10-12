@@ -1,0 +1,3 @@
+## 2024-03-22 - Conversational Multi-line Inputs
+**Learning:** For multi-line natural language inputs, users expect a conversational UX pattern where `Enter` triggers submission and `Shift+Enter` adds newlines, rather than standard textarea behavior. Adding visual hints like `<kbd>Enter</kbd> to submit` helps train users on this interaction.
+**Action:** Always implement `onKeyDown` handlers for Enter vs Shift+Enter on conversational multi-line textareas, and provide a small UI hint near the input.
