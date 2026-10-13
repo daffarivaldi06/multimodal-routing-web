@@ -24,6 +24,15 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      if (query.trim().length >= 10 && !isLoading) {
+        onSubmit(query.trim());
+      }
+    }
+  };
+
   const charCount = query.length;
   const isValid = charCount >= 10 && charCount <= 500;
 
@@ -42,6 +51,7 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
             rows={4}
             maxLength={500}
             disabled={isLoading}
+            onKeyDown={handleKeyDown}
             className={cn(
               "w-full rounded-xl bg-zinc-900 border text-sm text-zinc-200",
               "placeholder:text-zinc-600 resize-none",
@@ -73,7 +83,12 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
           </button>
         </form>
         <div className="flex justify-between items-center mt-1.5">
-          <span className="text-xs text-zinc-600">Min 10 characters</span>
+          <div className="flex items-center gap-3 text-xs text-zinc-600">
+            <span>Min 10 characters</span>
+            <span className="hidden sm:inline-flex items-center gap-1 opacity-70">
+              Press <kbd className="font-sans px-1.5 py-0.5 rounded-md bg-zinc-800 border border-zinc-700 text-[10px]">Enter ↵</kbd> to submit
+            </span>
+          </div>
           <span className={cn("text-xs", charCount > 480 ? "text-amber-500" : "text-zinc-600")}>
             {charCount}/500
           </span>
