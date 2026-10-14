@@ -24,6 +24,15 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      if (query.trim().length >= 10 && !isLoading) {
+        onSubmit(query.trim());
+      }
+    }
+  };
+
   const charCount = query.length;
   const isValid = charCount >= 10 && charCount <= 500;
 
@@ -38,6 +47,7 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
             id="route-query"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder="Describe your journey in natural language…"
             rows={4}
             maxLength={500}
