@@ -24,6 +24,15 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      if (query.trim().length >= 10 && !isLoading) {
+        onSubmit(query.trim());
+      }
+    }
+  };
+
   const charCount = query.length;
   const isValid = charCount >= 10 && charCount <= 500;
 
@@ -38,6 +47,7 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
             id="route-query"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder="Describe your journey in natural language…"
             rows={4}
             maxLength={500}
@@ -73,7 +83,13 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
           </button>
         </form>
         <div className="flex justify-between items-center mt-1.5">
-          <span className="text-xs text-zinc-600">Min 10 characters</span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-zinc-600">Min 10 characters</span>
+            <span className="text-xs text-zinc-600 hidden sm:inline-block">·</span>
+            <span className="text-xs text-zinc-600 hidden sm:inline-block">
+              Press <kbd className="px-1.5 py-0.5 rounded-md bg-zinc-800 border border-zinc-700 font-mono text-[10px]">Enter</kbd> to submit
+            </span>
+          </div>
           <span className={cn("text-xs", charCount > 480 ? "text-amber-500" : "text-zinc-600")}>
             {charCount}/500
           </span>
