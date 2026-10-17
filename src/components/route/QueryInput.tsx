@@ -87,7 +87,11 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
             <span className="text-xs text-zinc-600">Min 10 characters</span>
             <span className="text-xs text-zinc-600 hidden sm:inline-block">·</span>
             <span className="text-xs text-zinc-600 hidden sm:inline-block">
-              Press <kbd className="px-1.5 py-0.5 rounded-md bg-zinc-800 border border-zinc-700 font-mono text-[10px]">Enter</kbd> to submit
+              <kbd className="px-1.5 py-0.5 rounded-md bg-zinc-800 border border-zinc-700 font-mono text-[10px]">Enter</kbd> to submit
+            </span>
+            <span className="text-xs text-zinc-600 hidden sm:inline-block">·</span>
+            <span className="text-xs text-zinc-600 hidden sm:inline-block">
+              <kbd className="px-1.5 py-0.5 rounded-md bg-zinc-800 border border-zinc-700 font-mono text-[10px]">Shift</kbd> + <kbd className="px-1.5 py-0.5 rounded-md bg-zinc-800 border border-zinc-700 font-mono text-[10px]">Enter</kbd> for newline
             </span>
           </div>
           <span className={cn("text-xs", charCount > 480 ? "text-amber-500" : "text-zinc-600")}>
