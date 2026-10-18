@@ -2,7 +2,6 @@
 
 import { LogOut, Cpu } from "lucide-react";
 import { CacheBadge } from "@/components/shared/CacheBadge";
-import { cn } from "@/lib/utils";
 
 interface NavbarProps {
   model?: string;
@@ -32,6 +31,7 @@ export function Navbar({ model, cached, onLogout }: NavbarProps) {
         {cached !== undefined && <CacheBadge cached={cached} />}
         <button
           onClick={onLogout}
+          aria-label="Logout"
           className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-200 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 px-2.5 py-1.5 rounded-lg transition-all duration-200"
         >
           <LogOut size={12} />
