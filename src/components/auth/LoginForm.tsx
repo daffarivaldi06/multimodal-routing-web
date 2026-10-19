@@ -71,8 +71,7 @@ export function LoginForm() {
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
-            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors"
-            tabIndex={-1}
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 rounded"
             aria-label={showPassword ? "Hide password" : "Show password"}
           >
             {showPassword ? (
