@@ -35,13 +35,14 @@ export function LoginForm() {
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Email field */}
       <div className="space-y-1.5">
-        <label className="text-xs font-medium text-zinc-400">Email</label>
+        <label htmlFor="login-email" className="text-xs font-medium text-zinc-400">Email</label>
         <div className="relative">
           <Mail
             size={14}
             className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500 pointer-events-none"
           />
           <input
+            id="login-email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -54,13 +55,14 @@ export function LoginForm() {
 
       {/* Password field */}
       <div className="space-y-1.5">
-        <label className="text-xs font-medium text-zinc-400">Password</label>
+        <label htmlFor="login-password" className="text-xs font-medium text-zinc-400">Password</label>
         <div className="relative">
           <Lock
             size={14}
             className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500 pointer-events-none"
           />
           <input
+            id="login-password"
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -71,8 +73,7 @@ export function LoginForm() {
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
-            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors"
-            tabIndex={-1}
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 rounded"
             aria-label={showPassword ? "Hide password" : "Show password"}
           >
             {showPassword ? (
@@ -92,7 +93,7 @@ export function LoginForm() {
       </div>
 
       {error && (
-        <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+        <p role="alert" aria-live="polite" className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
           {error}
         </p>
       )}
@@ -100,7 +101,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium py-2.5 rounded-xl transition-all duration-200"
+        className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium py-2.5 rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900"
       >
         {isLoading ? <Loader2 size={14} className="animate-spin" /> : <LogIn size={14} />}
         {isLoading ? "Signing in…" : "Sign in"}

@@ -37,8 +37,9 @@ export function RegisterForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-1.5">
-        <label className="text-xs font-medium text-zinc-400">Email</label>
+        <label htmlFor="register-email" className="text-xs font-medium text-zinc-400">Email</label>
         <input
+          id="register-email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -48,8 +49,9 @@ export function RegisterForm() {
         />
       </div>
       <div className="space-y-1.5">
-        <label className="text-xs font-medium text-zinc-400">Password</label>
+        <label htmlFor="register-password" className="text-xs font-medium text-zinc-400">Password</label>
         <input
+          id="register-password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -60,7 +62,7 @@ export function RegisterForm() {
       </div>
 
       {error && (
-        <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+        <p role="alert" aria-live="polite" className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
           {error}
         </p>
       )}
@@ -68,7 +70,7 @@ export function RegisterForm() {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium py-2.5 rounded-xl transition-all duration-200"
+        className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium py-2.5 rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900"
       >
         {isLoading ? <Loader2 size={14} className="animate-spin" /> : <UserPlus size={14} />}
         {isLoading ? "Creating account…" : "Create account"}
