@@ -37,9 +37,11 @@ export function RegisterForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-1.5">
-        <label className="text-xs font-medium text-zinc-400">Email</label>
+        <label htmlFor="email" className="text-xs font-medium text-zinc-400">Email</label>
         <input
+          id="email"
           type="email"
+          autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
@@ -48,9 +50,11 @@ export function RegisterForm() {
         />
       </div>
       <div className="space-y-1.5">
-        <label className="text-xs font-medium text-zinc-400">Password</label>
+        <label htmlFor="password" className="text-xs font-medium text-zinc-400">Password</label>
         <input
+          id="password"
           type="password"
+          autoComplete="new-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Min 8 chars, 1 uppercase, 1 number"
