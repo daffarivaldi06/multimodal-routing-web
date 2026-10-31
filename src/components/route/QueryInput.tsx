@@ -67,9 +67,10 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
           <button
             type="submit"
             aria-label="Submit query"
+            title={!isValid && charCount > 0 ? "Query must be at least 10 characters" : isLoading ? "Loading route..." : "Submit query"}
             disabled={!isValid || isLoading}
             className={cn(
-              "absolute bottom-3 right-3 p-1.5 rounded-lg transition-all duration-200",
+              "absolute bottom-3 right-3 p-1.5 rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900",
               isValid && !isLoading
                 ? "bg-blue-600 hover:bg-blue-500 text-white"
                 : "bg-zinc-800 text-zinc-600 cursor-not-allowed"
@@ -103,7 +104,7 @@ export function QueryInput({ onSubmit, isLoading }: QueryInputProps) {
             key={q}
             onClick={() => setQuery(q)}
             disabled={isLoading}
-            className="w-full text-left text-xs text-zinc-500 hover:text-zinc-300 bg-zinc-900/50 hover:bg-zinc-800/80 border border-zinc-800 hover:border-zinc-700 rounded-lg px-3 py-2 transition-all duration-200 leading-relaxed disabled:opacity-40"
+            className="w-full text-left text-xs text-zinc-500 hover:text-zinc-300 bg-zinc-900/50 hover:bg-zinc-800/80 border border-zinc-800 hover:border-zinc-700 rounded-lg px-3 py-2 transition-all duration-200 leading-relaxed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
           >
             {q}
           </button>
