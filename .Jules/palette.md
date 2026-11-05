@@ -5,3 +5,6 @@
 **Learning:** A disabled submit button without explanation can be frustrating for users who don't know why they cannot proceed.
 **Action:** Always add a dynamic  or tooltip explaining the condition for the disabled state on buttons.
 ## 2026-10-29 - Explaining Disabled States\n**Learning:** A disabled submit button without explanation can be frustrating for users who don't know why they cannot proceed.\n**Action:** Always add a dynamic title or tooltip explaining the condition for the disabled state on buttons.
+## 2026-11-05 - Avoid tabIndex={-1} on interactive buttons
+**Learning:** Using `tabIndex={-1}` on inner input buttons (like a password visibility toggle) breaks keyboard accessibility by preventing users from accessing them via the `Tab` key.
+**Action:** Remove `tabIndex={-1}` on buttons meant to be interacted with, and ensure proper `focus-visible` styles are implemented to show when they receive focus.

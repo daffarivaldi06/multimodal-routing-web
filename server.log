@@ -1,0 +1,15 @@
+
+> frontend@0.1.0 dev /app
+> next dev -p 3001 --webpack
+
+▲ Next.js 16.3.6 (webpack)
+- Local:         http://localhost:3001
+- Network:       http://192.168.0.2:3001
+✓ Ready in 580ms
+✓ Running next.config.ts took 49ms
+
+○ Compiling /login ...
+ GET /login 200 in 11.8s (next.js: 11.4s, application-code: 373ms)
+ GET /register 200 in 1352ms (next.js: 1078ms, application-code: 274ms)
+ GET /login 200 in 61ms (next.js: 16ms, application-code: 45ms)
+⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
