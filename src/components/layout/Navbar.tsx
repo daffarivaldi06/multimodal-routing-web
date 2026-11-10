@@ -32,7 +32,9 @@ export function Navbar({ model, cached, onLogout }: NavbarProps) {
         {cached !== undefined && <CacheBadge cached={cached} />}
         <button
           onClick={onLogout}
-          className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-200 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 px-2.5 py-1.5 rounded-lg transition-all duration-200"
+          aria-label="Logout"
+          title="Logout"
+          className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-200 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 px-2.5 py-1.5 rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
         >
           <LogOut size={12} />
           <span className="hidden sm:block">Logout</span>
